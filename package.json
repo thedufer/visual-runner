@@ -1,0 +1,19 @@
+{
+  "name": "visual-runner",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:thedufer/visual-runner.git"
+  },
+  "author": "Aaron Dufour <thedufer@gmail.com> (https://aarondufour.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/thedufer/visual-runner/issues"
+  },
+  "homepage": "https://github.com/thedufer/visual-runner"
+}
