@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "coffee -c -j index.coffee visual-runner.coffee",
+    "prepublish": "npm run compile"
   },
   "repository": {
     "type": "git",
@@ -15,5 +17,11 @@
   "bugs": {
     "url": "https://github.com/thedufer/visual-runner/issues"
   },
-  "homepage": "https://github.com/thedufer/visual-runner"
+  "homepage": "https://github.com/thedufer/visual-runner",
+  "dependencies": {
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "coffee-script": "^1.9.2"
+  }
 }
