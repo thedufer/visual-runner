@@ -24,30 +24,22 @@ class VisualRunner
   loadState: (key) ->
     throw "Not implemented"
 
-  setupSeekControl: (control) ->
-    if control?
-      @seekControl = control
+  setSeek: (cur, max) ->
+    throw "Not implemented"
 
-      pausedForSeek = false
-      @seekControl.on 'mousedown', =>
-        if @_stepId?
-          pausedForSeek = true
-          @pause()
-      @seekControl.on 'mouseup', =>
-        if pausedForSeek
-          @play()
-        pausedForSeek = false
-        return
-      @seekControl.on 'input', =>
-        @_setIndex(parseInt(@seekControl.val(), 10))
+  setSeekDefaults: ->
+    @setSeek(@getIndex(), @getLength())
 
-    @seekControl
-      .val(@_index)
-      .attr('min', 0)
-      .attr('step', 1)
-      .attr('max', (@_funcQueue?.length || 0))
+  isPlaying: ->
+    @_stepId?
 
-  _setIndex: (i) ->
+  getIndex: ->
+    @_index
+
+  getLength: ->
+    @_funcQueue?.length || 0
+
+  setIndex: (i) ->
     runOneStep = (step) =>
       { name, args } = @_funcQueue[step]
       @exposedFuncs[name](args...)
@@ -60,7 +52,7 @@ class VisualRunner
       runOneStep(@_index)
       @_index++
 
-    @seekControl.val(@_index)
+    @setSeekDefaults()
 
     @render(@_dataQueue[@_index - 1] ? {})
 
@@ -80,7 +72,7 @@ class VisualRunner
   _step: ->
     if @_index >= @_funcQueue.length
       return @pause()
-    @_setIndex(@_index + 1)
+    @setIndex(@_index + 1)
 
   render: ->
     throw "Not implemented"
@@ -96,7 +88,7 @@ class VisualRunner
       @loadControls()
       @createInitialState(0)
       @_clearPrev()
-      @setupSeekControl()
+      @setSeekDefaults()
       @render({})
     @renderControls()
 
@@ -120,9 +112,9 @@ class VisualRunner
     @_clearPrev()
     @loadState(0)
     @doTask()
-    @setupSeekControl()
+    @setSeekDefaults()
     @loadState(0)
-    @_setIndex(0)
+    @setIndex(0)
     @play()
 
   _stepAndContinue: ->
