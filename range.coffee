@@ -26,3 +26,5 @@ class VisualRunnerRange extends VisualRunner
         @setIndex(parseInt(@seekControl.val(), 10))
 
     @setSeekDefaults()
+
+module.exports = VisualRunnerRange
